@@ -116,6 +116,10 @@
   footer{background:var(--graphite);color:rgba(245,239,230,.5);text-align:center;padding:24px;font-size:.78rem;}
   footer a{color:var(--amber);text-decoration:none;}
 
+  .back-to-top{position:fixed;bottom:24px;right:24px;z-index:200;width:44px;height:44px;background:var(--eggplant);color:var(--cream);border:none;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);opacity:0;transition:opacity .3s,transform .3s;pointer-events:none;}
+  .back-to-top.visible{opacity:1;pointer-events:all;}
+  .back-to-top:hover{background:var(--terra);transform:translateY(-2px);}
+
   @media(max-width:900px){
     .audience-grid,.steps-grid,.features-grid,.tariffs-grid,.reviews-grid{grid-template-columns:1fr;}
     .section{padding:56px 20px;}
@@ -130,7 +134,7 @@
     <a href="index.html" class="nav-logo">
       <span class="nav-logo-text">Вышла из системы</span>
     </a>
-    <a href="index.html" class="nav-back">← На главную</a>
+    <a href="index.html#home" class="nav-back">← На главную</a>
   </div>
 </nav>
 
@@ -353,8 +357,12 @@
 </section>
 
 <footer>
-  © 2026 Юлия Пощева · <a href="index.html">На главную</a> · <a href="privacy.html">Политика конфиденциальности</a>
+  © 2026 Юлия Пощева · <a href="index.html#home">На главную</a> · <a href="privacy.html">Политика конфиденциальности</a>
 </footer>
+
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Наверх">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <script>
 function toggleFaq(el) {
@@ -363,6 +371,8 @@ function toggleFaq(el) {
   document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
   if (!isOpen) item.classList.add('open');
 }
+const btt = document.getElementById('backToTop');
+window.addEventListener('scroll', () => btt.classList.toggle('visible', window.scrollY > 400));
 </script>
 </body>
 </html>
